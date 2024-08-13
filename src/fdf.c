@@ -6,7 +6,7 @@
 /*   By: vcaratti <vcaratti@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 12:22:43 by vcaratti          #+#    #+#             */
-/*   Updated: 2024/08/12 12:46:30 by vcaratti         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:32:00 by vcaratti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void	set_max_data(t_scaler *s, t_node ***data)
 		}
 		printf("[\n");fflush(stdout);
 	}
+	if (max <= 0)
+		max = 1;
 	s->max = max;
 }
 
