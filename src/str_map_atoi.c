@@ -6,54 +6,13 @@
 /*   By: vcaratti <vcaratti@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:10:53 by vcaratti          #+#    #+#             */
-/*   Updated: 2024/08/05 14:32:32 by vcaratti         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:57:18 by vincenzocarat    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	is_whitespace(char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
-}
-
-int	str_arr_len(char **str_arr)
-{
-	int	counter;
-
-	counter = 0;
-	while (str_arr[counter])
-		counter++;
-	return (counter);
-}
-
-static int	map_free_str_e_ret(char **arr, int counter, int length, int error)
-{
-	while (counter < length)
-	{
-		free(arr[counter]);
-		counter++;
-	}
-	free(arr);
-	return (error);
-}
-
-static	int	map_free_e_ret(char **arr, int error)
-{
-	int	counter;
-
-	counter = 0;
-	while (arr[counter])
-	{
-		free(arr[counter]);
-		counter++;
-	}
-	return (error);
-}
-
-void	remove_newline(char **nums_str)
+static void	remove_newline(char **nums_str)
 {
 	char	*newline;
 	int		counter;
@@ -112,7 +71,7 @@ static int	map_atoi(char **nums_str, int wc, t_node ***nums)
 	free(nums_str);
 	return (0);
 }
-#include <stdio.h>
+
 int	str_map_atoi(char **nums_str, t_node ***nums, int wc)
 {
 	if (!nums_str)

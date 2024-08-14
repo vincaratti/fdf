@@ -6,7 +6,7 @@
 /*   By: vcaratti <vcaratti@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:09:58 by vcaratti          #+#    #+#             */
-/*   Updated: 2024/08/13 11:06:49 by vcaratti         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:53:12 by vincenzocarat    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,13 @@ char	***split_lines(char **data)
 		return (NULL);
 	while (data[i])
 	{
-		printf("DATA: %s\n",data[i]);
 		new_data[i] = ft_split(data[i], ' ');
 		if (!new_data[i])
 			return (free_n(new_data, i), NULL);
-		int j = 0; while (new_data[i][j]){printf("%s ",new_data[i][j]);j++;}printf("\n");
-		printf("last_len: %d, len: %d\n", last_len, arr_len(new_data[i]));
 		if (last_len == -1 || last_len == arr_len(new_data[i]))
 			last_len = arr_len(new_data[i]);
 		else
-			return (printf("this?\n"),free_n(new_data, i + 1), NULL);
+			return (free_n(new_data, i + 1), NULL);
 		i++;
 	}
 	new_data[i] = 0;
@@ -104,19 +101,14 @@ char	***read_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	file_str = malloc(sizeof(char) * (file_size + 2));
 	file_str[file_size + 1] = 0;
-	file_str[file_size] = 0;
+	file_str[file_size] = '\n';
 	if (file_str == NULL || fd == -1)
 		return (printf("222\n"),close(fd), free(file_str), NULL);
 	if (read(fd, file_str, file_size) != file_size)
 		return (printf("333\n"),close(fd), free(file_str), NULL);
-	if (file_str[file_size - 1] != '\n')
-		file_str[file_size] = '\n';
-	close(fd);
-	printf("line_str: %s\n", file_str);
 	data = ft_split(file_str, '\n');
-	free(file_str);
 	if (data == NULL)
-		return (printf("444\n"),NULL);
+		return (close(fd), free(file_str), NULL);
 	ret = split_lines(data);
-	return (printf("5555\n"),free_arr(data), ret);
+	return (close(fd), free(file_str), free_arr(data), ret);
 }

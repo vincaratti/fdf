@@ -9,7 +9,11 @@ SRC			=	fdf.c					\
 				draw_line.c				\
 				parser.c				\
 				str_map_atoi.c			\
-				read_file.c
+				read_file.c			\
+				str_map_atoi_tools.c		\
+				parser_tools.c			\
+				iso_tools.c			\
+				fdf_tools.c
 					
 OBJ			=	${addprefix $(OBJDIR), $(SRC:%.c=%.o)}
 

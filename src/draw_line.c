@@ -6,7 +6,7 @@
 /*   By: vcaratti <vcaratti@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 12:15:55 by vcaratti          #+#    #+#             */
-/*   Updated: 2024/08/12 12:00:56 by vcaratti         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:47:22 by vincenzocarat    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void draw_line(t_pnode *a, t_pnode *b, t_data *img)
     int		i;
 	int		chosen_colour;
 
-	printf("Drawing from [%d, %d] to [%d, %d]\n", a->p_x, a->p_y, b->p_x, b->p_y);fflush(stdout);
-
     x = a->p_x;
     y = a->p_y;
     if (ft_abs(b->p_x - a->p_x) > ft_abs(b->p_y - a->p_y))
@@ -46,18 +44,14 @@ void draw_line(t_pnode *a, t_pnode *b, t_data *img)
     else
 	    steps = ft_abs(b->p_y - a->p_y);
     i = 0;
-	printf("drawing: %X, %X\n", a->colour, b->colour);
     while (i <= steps) 
     {
 		chosen_colour = 0xFFFFFF;
 		if (a->colour == b->colour)
 			chosen_colour = a->colour;
-		//printf("[%d,%d] ", ft_round(x), ft_round(y));fflush(stdout);
-        //printf("Plotting point: (%.0f, %.0f)\n", round(x), round(y));
-        my_mlx_pixel_put(img, ft_round(x), ft_round(y), chosen_colour/* + (float)(b->colour - a->colour) * ((float)i / (float)steps)*/);
+        my_mlx_pixel_put(img, ft_round(x), ft_round(y), chosen_colour);
 		x += (b->p_x - a->p_x) / (float) steps;
         y += (b->p_y - a->p_y) / (float) steps;
 	i++;
     }
-	//printf("\n");
 }
